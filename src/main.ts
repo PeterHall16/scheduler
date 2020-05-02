@@ -10,7 +10,7 @@ import { rejects } from "assert"
 
 let MAX_GRADE = 0
 let MAX_QUANTITY = 0
-const GENERATIONS = 30000
+const GENERATIONS = 10000
 
 function setup(division: string) {
     switch (division) {
