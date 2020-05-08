@@ -17,10 +17,6 @@ export default class Event {
         this.rankings = rankings
     }
 
-    display() {
-        // Add stuff to pront out the schedule
-    }
-
     fitness(): number {
         let fitness = 0
         for (let c of this.competitors) {

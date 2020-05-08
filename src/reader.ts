@@ -3,7 +3,6 @@ import Competitor from './Classes/Competitor'
 
 export function readEvents(scheduleRows, rankingsRows): Event[] {
     let generalEvents = []
-    // console.log(scheduleRows)
 
     for (let i = 1; i < scheduleRows.length; i++) {
         let eventRankings = []

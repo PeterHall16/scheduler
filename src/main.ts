@@ -3,17 +3,14 @@ import Competitor, { getBestCompetitor } from "./Classes/Competitor"
 import { readEvents, readTeamMembers, populateCompetitors } from "./reader"
 import readXlsxFile = require('read-excel-file/node')
 import 'source-map-support/register'
-import { getEnabledCategories } from "trace_events"
-import { rejects } from "assert"
-
-// ! Fix display of the schedule
 
 let MAX_GRADE = 0
 let MAX_QUANTITY = 0
-const GENERATIONS = 10000
+let generations = 1000
 
-function setup(division: string) {
-    switch (division) {
+function setup(division: string, generations: number) {
+    generations = generations
+    switch (division.toUpperCase()) {
         case "B":
             MAX_GRADE = 9
             MAX_QUANTITY = 5
@@ -32,7 +29,6 @@ function shuffle(array) {
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -109,6 +105,7 @@ function generate(eventData, competitors): Schedule {
     }
 
     activeSchedule.members = team
+
     return activeSchedule
 }
 
@@ -125,7 +122,7 @@ export let readRankingsRows = new Promise((resolve, reject) => {
 })
 
 export function main(generations: number, scheduleRows, rankingsRows): Schedule {
-    setup("C")
+    // setup("C")
 
     // let readTeam = readTeamMembers(rankingsRows)
     let competitorList: Competitor[] = populateCompetitors(rankingsRows)
@@ -140,23 +137,15 @@ export function main(generations: number, scheduleRows, rankingsRows): Schedule 
         let activeSchedule = generate(readEv, competitorList)
         let current_fitness = activeSchedule.fitness()
         // Replace the best schedule if this one is better
-        // activeSchedule.display()
         if (current_fitness > best_fitness) {
             best_schedule = activeSchedule
             best_fitness = current_fitness
         }
-
         activeSchedule = null
     }
 
-    // best_schedule.display()
-
     return best_schedule
 }
-
-
-
-
 
 export default function start(generations: number) {
     return new Promise((resolve, reject) => {
@@ -167,24 +156,32 @@ export default function start(generations: number) {
 
             let schedule = main(generations, scheduleRows, rankingsRows)
             resolve(schedule)
-
         }).catch(err => {
             console.error(err);
             reject(err)
         })
     })
-
 }
 
-
+// Main Process
 if (require.main == module) {
-    console.log("Main thread.")
-    let hrstart = process.hrtime()
-    start(GENERATIONS).then((schedule: Schedule) => {
-        let hrend = process.hrtime(hrstart);
-        console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
-        schedule.display()
-    })
+    const readline = require("readline");
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("Select Division (B or C) ", function (division) {
+        rl.question("How many generations ", function (generations) {
+            setup(division, generations)
+            console.log("Optimizing...")
+            let hrstart = process.hrtime()
+            start(generations).then((schedule: Schedule) => {
+                let hrend = process.hrtime(hrstart);
+                console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
+                schedule.display()
+            })
+            rl.close();
+        });
+    });
 }
-
-

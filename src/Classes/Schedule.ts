@@ -25,13 +25,16 @@ export default class Schedule {
 
         for (let i = 0; i < this.events.length; i++) {
             let string = ""
-            console.log(this.events[i].period + " | " + this.events[i].name + " | " + this.events[i].competitors[0].name + " - " + this.events[i].competitors[1].name)
+            for (let j = 0; j < this.events[i].competitors.length; j++) {
+                string = string + " - " + this.events[i].competitors[j].name
+            }
+            console.log(this.events[i].period + " | " + this.events[i].name + string)
         }
-
-        console.log("Fitness: " + (this.fitness() / 4900))
 
         for (let entry of this.members) {
             console.log(entry.name, entry.grade)
         }
+
+        console.log("Fitness: " + (this.fitness() / 4900))
     }
 }
