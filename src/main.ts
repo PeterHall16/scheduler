@@ -178,8 +178,8 @@ if (require.main == module) {
             let hrstart = process.hrtime()
             start(generations).then((schedule: Schedule) => {
                 let hrend = process.hrtime(hrstart);
-                console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
                 schedule.display()
+                console.info('Execution time (hr): %ds %dms', hrend[0], hrend[1] / 1000000)
             })
             rl.close();
         });
