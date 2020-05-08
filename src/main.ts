@@ -110,13 +110,13 @@ function generate(eventData, competitors): Schedule {
 }
 
 export let readScheduleRows = new Promise((resolve, reject) => {
-    readXlsxFile('../Data.xlsx', { sheet: 1 }).then((rows) => {
+    readXlsxFile('Data.xlsx', { sheet: 1 }).then((rows) => {
         resolve(rows)
     })
 })
 
 export let readRankingsRows = new Promise((resolve, reject) => {
-    readXlsxFile('../Data.xlsx', { sheet: 2 }).then((rows) => {
+    readXlsxFile('Data.xlsx', { sheet: 2 }).then((rows) => {
         resolve(rows)
     })
 })
