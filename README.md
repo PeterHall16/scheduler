@@ -33,16 +33,16 @@ A competitive schedule is defined subjectively, however within this project the 
 This application requires you to have Node.js installed on your computer. Downloads can be found at https://nodejs.org/en/.
 
 ### TypeScript
-The algorithm is written in the [TypeScript](https://www.typescriptlang.org) language, it can be installed with the command 'npm install -g typescript'. Depending on permissions, you may need to run this command as an administrator.
+The algorithm is written in the [TypeScript](https://www.typescriptlang.org) language, it can be installed with the command `npm install -g typescript`. Depending on permissions, you may need to run this command as an administrator.
 
 ### Installing the necessary libraries
-Once you have Node.js installed, open a command line at the parent directory of the project ("Science-Olympiad-Scheduler") and run the command 'npm install'.
+Once you have Node.js installed, open a command line at the parent directory of the project ("Science-Olympiad-Scheduler") and run the command `npm install`.
 
 ### Choosing data for the program to read.
 Add your excel file titled "Data.xlsx" to the parent directory.
 
 ### Build the files
-In the parent directory console, run 'npx tsc' to build the necessary files.
+In the parent directory console, run `npx tsc` to build the necessary files.
 
 ### Running the program
-In the same console as before, run 'npm run launch'
+In the parent directory console, run `npm run launch`.
