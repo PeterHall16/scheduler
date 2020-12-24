@@ -39,7 +39,7 @@ The algorithm is written in the [TypeScript](https://www.typescriptlang.org) lan
 Once you have Node.js installed, open a command line at the parent directory of the project ("Science-Olympiad-Scheduler") and run the command `npm install`.
 
 ### Choosing data for the program to read.
-Add your excel file titled "Data.xlsx" to the parent directory.
+Add your Excel file titled "Data.xlsx" to the parent directory. Make sure the file follows the formatting of the example data.
 
 ### Build the files
 In the parent directory console, run `npx tsc` to build the necessary files.
